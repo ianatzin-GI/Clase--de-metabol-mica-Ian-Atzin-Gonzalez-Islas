@@ -1,0 +1,23 @@
+perros <- 15
+obejas <- 200
+
+perros + obejas
+
+gatos <- "25"
+perros + gatos
+
+obejas / perros
+
+CHO <- 535000 #cel/mL
+VERO <- 1350000 #cel/mL
+total <- CHO+VERO
+
+Nombre <- c("Manuel", "July", "Ian", "Pau", "Fede", "Lulú", "Paola")
+Estatura <- c(1.77, 1.55, 1.73, 1.63, 1.70, 1.70, 1.57)
+Edad <- c(41, 22, 27, 26, 22, 23, 23)
+Mascotas <- c("Si", "Si", "Si", "No", "Si", "Si", "Si")
+ Tabla <- data.frame(Nombre, Estatura, Edad, Mascotas)
+Tabla
+View(Tabla)
+Promedio_estatura <- mean(Tabla$Estatura)
+Promedio_estatura
