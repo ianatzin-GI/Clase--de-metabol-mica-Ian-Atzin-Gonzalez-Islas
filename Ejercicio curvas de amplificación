@@ -1,0 +1,32 @@
+# Nombre: "Ian Atzin Gonzalez Islas"
+# Materia: "Ciencias Ómicas, metabolómica"
+# Grupo: "2"
+# Ejercicio curvas de amplificación 
+install.packages("pacman")
+#pacman llama a otros paquetes, y si no estan, los instala
+library(pacman)
+p_load("vroom", # llamar base de datos
+       "dplyr", # facilita el manejo de datos
+       "ggplot2") #graficar
+     
+Garu <- vroom(file="https://raw.githubusercontent.com/ManuelLaraMVZ/resultados_PCR_practica/refs/heads/main/Amplif_grupo1_17022025.csv")
+       head (Garu)
+       Datos <- Garu %>% # %>% significa que la base de datos 
+       select ("Cycle",A1)
+       Datos
+       
+       grafica <-ggplot(Datos,
+                        mapping = aes(x=Cycle,
+                                      y=A1))+
+         geom_line(color="#2A573B",
+                   size= 1.5)+
+         labs(x="Ciclos",
+              y="Fluorecencia",
+              title="Gráfica de amplificación RT-qPCR",
+              subtitle ="Muestra A1",
+              caption="Diseño: Ian Atzin Gonzalez Islas")+
+         geom_point(color="#6B0A0A")+
+         theme_classic()
+       
+         
+grafica
