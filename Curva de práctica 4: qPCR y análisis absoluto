@@ -1,0 +1,32 @@
+# Nombre: "Ian Atzin Gonzalez Islas"
+# Materia: "Ciencias Ómicas, metabolómica"
+# Grupo: "2"
+# Práctica 4: qPCR y análisis absoluto
+install.packages("pacman")
+#pacman llama a otros paquetes, y si no estan, los instala
+library(pacman)
+p_load("vroom", # llamar base de datos
+       "dplyr", # facilita el manejo de datos
+       "ggplot2", "tidyr") #graficar
+
+Amplif  <- vroom(file="https://raw.githubusercontent.com/ianatzin-GI/Clase--de-metabol-mica-Ian-Atzin-Gonzalez-Islas/refs/heads/main/Datos%20Curva%20G1%20y%20G2.csv")
+head (Amplif)
+Datos_long <- Amplif %>% # %>% significa que la base de datos 
+  pivot_longer(cols = -Cycle, names_to = "Muestra", values_to = "Fluorescencia")
+
+Datos_long
+
+grafica <- ggplot(Datos_long, aes(x = Cycle, y = Fluorescencia, color = Muestra)) +
+  geom_line(size = 1.2) +
+  geom_point(size = 1.5) +
+  labs(x = "Ciclos",
+       y = "Fluorescencia",
+       title = "Curvas de amplificación RT-qPCR",
+       subtitle = "Práctica 4: G1-M (2:30) y G2-M (4:00)",
+       caption = "Diseño: Ian Atzin Gonzalez Islas") +
+  theme_classic()
+
+grafica
+
+# Guardar la gráfica
+ggsave("Curva_Amplificacion_G1_G2.png", grafica, width = 7, height = 5, dpi = 300)
