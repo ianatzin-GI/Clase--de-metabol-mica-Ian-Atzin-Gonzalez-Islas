@@ -1,4 +1,3 @@
-# Nombre: "Ian Atzin Gonzalez Islas"
 # Materia: "Ciencias Ómicas, metabolómica"
 # Grupo: "2"
 # Práctica 4: qPCR y análisis absoluto
@@ -14,19 +13,20 @@ head (Amplif)
 Datos_long <- Amplif %>% # %>% significa que la base de datos 
   pivot_longer(cols = -Cycle, names_to = "Muestra", values_to = "Fluorescencia")
 
-Datos_long
+Datos_G2 <- Datos_long %>%
+  filter(grepl("G2", Muestra)) 
 
-grafica <- ggplot(Datos_long, aes(x = Cycle, y = Fluorescencia, color = Muestra)) +
-  geom_line(size = 1.2) +
-  geom_point(size = 1.5) +
+grafica_G2 <- ggplot(Datos_G2, aes(x = Cycle, y = Fluorescencia, color = Muestra)) +
+  geom_line(size = 1.2, color = "#E4007C") +
+  geom_point(size = 1.5, color = "#E4007C") +
   labs(x = "Ciclos",
        y = "Fluorescencia",
-       title = "Curvas de amplificación RT-qPCR",
-       subtitle = "Práctica 4: G1-M (2:30) y G2-M (4:00)",
-       caption = "Diseño: Ian Atzin Gonzalez Islas") +
+       title = "Curva de amplificación RT-qPCR",
+       subtitle = "Práctica 4: Grupo G2-M",
+       caption = "Diseño: JIF") +
   theme_classic()
 
-grafica
+grafica_G2
 
 # Guardar la gráfica
-ggsave("Curva_Amplificacion_G1_G2.png", grafica, width = 7, height = 5, dpi = 300)
+ggsave("Curva_Amplificacion_G2.png", grafica_G2, width = 7, height = 5, dpi = 300)
